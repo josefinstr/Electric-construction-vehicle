@@ -59,12 +59,13 @@ a, b = best_fit(mpower, beq)
 
 #plot
 plt.figure(num=None)
-plt.scatter(mpower,beq)
+plt.scatter(mpower,beq,label='data')
 yfit = [a + b * xi for xi in mpower]
-plt.plot(mpower, yfit, 'r--')
+plt.plot(mpower, yfit, 'r--',label="fitted line")
 plt.title('Battery equivalent size vs. engine power', fontsize=15)
 plt.xlabel('Engine power [kW]', fontsize=13)
 plt.ylabel('Battery equivalent size [kWh]', fontsize=13)
+plt.legend()
 plt.grid()
 plt.savefig("b_eq_size.png")
 plt.show()
