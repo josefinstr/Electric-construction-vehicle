@@ -29,9 +29,9 @@ plt.savefig("vehicle_fleet.png")
 plt.show()
 
 # battery equivalent size vs. motor power
-beq = np.array([61, 61, 61, 61, 81, 81, 186, 203, 305, 319, 726, 581, 726, 726,
-                958, 929, 830, 1370, 1370, 1684, 1010, 1800, 1974, 1974, 1974,
-                1974, 2322, 3672])
+beq = np.array([85, 85, 85, 85, 114, 114, 260, 284, 427, 447, 1016, 813, 1016, 1016,
+                1341, 1300, 1162, 1918, 1918, 2357, 1414, 2520, 2764, 2764, 2764,
+                2764, 3251, 5141])
 mpower = np.array([12, 12, 12, 12, 15.6, 15.6, 18.5, 31.2, 44.3, 43, 90.0, 90,
                    110.0, 110, 115, 129.0, 129, 168, 189, 220, 180, 226, 278,
                    278, 340, 340, 385, 449])
@@ -61,11 +61,50 @@ a, b = best_fit(mpower, beq)
 plt.figure(num=None)
 plt.scatter(mpower,beq,label='Data')
 yfit = [a + b * xi for xi in mpower]
-plt.plot(mpower, yfit, 'r--',label="Fitted line: y = 4.55 + 6.90x")
+plt.plot(mpower, yfit, 'r--',label="Fitted line: y = 6.15 + 9.66x")
 plt.title('Battery equivalent size vs. engine power', fontsize=15)
 plt.xlabel('Engine power [kW]', fontsize=13)
 plt.ylabel('Battery equivalent size [kWh]', fontsize=13)
 plt.legend()
 plt.grid()
 plt.savefig("b_eq_size.png")
+plt.show()
+
+# energy demand
+daily_demand = np.array([449	,746, 746, 300,	814,	1396, 1544, 2001, 2070,	2070,
+                         2219, 2966, 3965, 3816, 4262, 5085, 5484, 5807, 0,
+                         5133, 5282, 5362, 300, 300])
+monthly_demand = np.array([8972.094612, 14916.28384, 14916.28384, 6000,
+                           16285.31313, 27915.56912, 30887.66373, 40029.70521,
+                           41398.7345, 41398.7345, 44370.82912, 59329.32839,
+                           79301.42301, 76329.32839, 85245.61223, 101700.8722,
+                           109686.5622, 116147.9474,	0, 102664.782, 105636.8767,
+                           107231.6636, 6000, 6000])
+per_charge = np.array([2990.698204, 4972.094612, 4972.094612, 2000, 5428.43771,
+                       9305.189707, 10295.88791, 13343.23507, 13799.57817, 13799.57817,
+                       14790.27637, 19776.4428, 26433.80767, 25443.10946, 28415.20408, 
+                       33900.29074, 36562.18739, 38715.98248, 0, 34221.59401, 35212.29222,
+                       35743.88786, 2000, 2000])
+month_no = np.arange(1,25)
+width = 0.25
+
+#plot
+plt.figure(figsize=(20,13))
+plt.rc('axes', labelsize=50)
+plt.rc('xtick', labelsize=20)
+plt.bar(month_no, daily_demand, color = 'b',
+        width = width, edgecolor = 'black',
+        label='Daily energy demand [kWh/day]')
+plt.bar(month_no + width, monthly_demand, color = 'r',
+        width = width, edgecolor = 'black',
+        label='Monthly energy demand [kWh/month]')
+plt.bar(month_no + width*2, per_charge, color = 'g',
+        width = width, edgecolor = 'black',
+        label='Energy demand per charge [kWh/month]')
+plt.xticks(month_no)
+plt.xlabel("Month", fontsize=20)
+plt.ylabel("Energy demand [kWh]", fontsize=20)
+plt.title("Total vehicle energy demand", fontsize=20)
+plt.legend()
+plt.grid()
 plt.show()
