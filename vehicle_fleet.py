@@ -21,12 +21,15 @@ df = pd.DataFrame([['1', 2, 1, 0, 0, 0, 0, 0, 0], ['2', 2, 3, 0, 0, 0, 0, 0, 0],
                            'Wheel loader', 'Truck', 'Crawler tractor'])
 # view data
 print(df)
+# print(df['Month'])
  
 # plot data in stack manner of bar type
-df.plot(x='Month', kind='bar', stacked=True,
-        title='Vehicle fleet')
+fig1 = plt.figure(figsize=(5.5, 3.5))
+ax1 = fig1.add_subplot(111)
+# ax1.plot(df.x)
+df.plot(x='Month', kind='bar', stacked=True, title='Vehicle fleet',ax=ax1)
 plt.savefig("vehicle_fleet.png")
-plt.show()
+fig1.show()
 
 # battery equivalent size vs. motor power
 beq = np.array([85, 85, 85, 85, 114, 114, 260, 284, 427, 447, 1016, 813, 1016, 1016,
@@ -58,17 +61,18 @@ a, b = best_fit(mpower, beq)
 #best fit line: y = 4.55 + 6.90x
 
 #plot
-plt.figure(num=None)
-plt.scatter(mpower,beq,label='Data')
+fig2 = plt.figure(figsize=(5.5, 3.5))
+ax2 = fig2.add_subplot(111)
+ax2.scatter(mpower,beq,label='Data')
 yfit = [a + b * xi for xi in mpower]
-plt.plot(mpower, yfit, 'r--',label="Fitted line: y = 6.15 + 9.66x")
-plt.title('Battery equivalent size vs. engine power', fontsize=15)
-plt.xlabel('Engine power [kW]', fontsize=13)
-plt.ylabel('Battery equivalent size [kWh]', fontsize=13)
-plt.legend()
-plt.grid()
-plt.savefig("b_eq_size.png")
-plt.show()
+ax2.plot(mpower, yfit, 'r--',label="Fitted line: y = 6.15 + 9.66x")
+ax2.set_title('Battery equivalent size vs. engine power', fontsize=15)
+ax2.set_xlabel('Engine power [kW]', fontsize=13)
+ax2.set_ylabel('Battery equivalent size [kWh]', fontsize=13)
+ax2.legend()
+ax2.grid()
+fig2.savefig("b_eq_size.png")
+fig2.show()
 
 # energy demand
 daily_demand = np.array([449	,746, 746, 300,	814,	1396, 1544, 2001, 2070,	2070,
@@ -89,22 +93,26 @@ month_no = np.arange(1,25)
 width = 0.25
 
 #plot
-plt.figure(figsize=(20,13))
-plt.rc('axes', labelsize=50)
-plt.rc('xtick', labelsize=20)
-plt.bar(month_no, daily_demand, color = 'b',
+# plt.figure(figsize=(20,13))
+# plt.rc('axes', labelsize=50)
+# plt.rc('xtick', labelsize=20)
+fig3 = plt.figure(figsize=(12, 7))
+ax3 = fig3.add_subplot(111)
+ax3.bar(month_no, daily_demand, color = 'b',
         width = width, edgecolor = 'black',
         label='Daily energy demand [kWh/day]')
-plt.bar(month_no + width, monthly_demand, color = 'r',
+ax3.bar(month_no + width, monthly_demand, color = 'r',
         width = width, edgecolor = 'black',
         label='Monthly energy demand [kWh/month]')
-plt.bar(month_no + width*2, per_charge, color = 'g',
+ax3.bar(month_no + width*2, per_charge, color = 'g',
         width = width, edgecolor = 'black',
         label='Energy demand per charge [kWh/month]')
-plt.xticks(month_no)
-plt.xlabel("Month", fontsize=20)
-plt.ylabel("Energy demand [kWh]", fontsize=20)
-plt.title("Total vehicle energy demand", fontsize=20)
-plt.legend()
-plt.grid()
-plt.show()
+ax3.set_xticks(month_no)
+ax3.tick_params(axis='x', labelsize=15)
+ax3.tick_params(axis='y', labelsize=15)
+ax3.set_xlabel("Month", fontsize=20)
+ax3.set_ylabel("Energy demand [kWh]", fontsize=20)
+ax3.set_title("Total vehicle energy demand", fontsize=20)
+ax3.legend(fontsize=20)
+ax3.grid()
+fig3.show()
