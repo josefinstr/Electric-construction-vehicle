@@ -18,31 +18,10 @@ h2elec = fc * pow_elec
 runtime = np.arange(0,1,0.001)
 storage_lst = []
 
-# i = 1
-# mw = i #MW
-# grid_charge = mw * trans * pow_elec
-# grid_energy = grid_charge * charge_time
-# veh_E = tot_veh_E * runtime
-# elec_from_storage = veh_E - grid_energy
-# elec_from_storage = np.where((veh_E - grid_energy)<=0,0,veh_E - grid_energy)
-# h_need_storage = elec_from_storage/h2elec
-# max_stor = stor_charge_time * mw * grid2h
-# h2_import = np.where((h_need_storage - max_stor)<=0,0,(h_need_storage - max_stor))
-# h_stor_possible = np.where(h_need_storage>=max_stor,np.NaN,h_need_storage)
-# plt.plot(runtime,h2_import,":",color=colors[i-1])
-# # storage_lst.append(h_stor_possible)
-# plt.plot(runtime,h_stor_possible,"-",color=colors[i-1])
-# plt.grid()
-# plt.xlim(0,0.5)
-
-# plt.yticks()
-# plt.ylim(0,10)
 linewidth=2
 plt.figure(figsize=(12,12))
 plt.rc('font', size=15)
 mw_lst = [0.5,1,2,3]
-print(np.array(mw_lst)-1)
-print(np.argmin(np.abs(np.array(mw_lst)-1)))
 for i in mw_lst:
     mw = i #MW
     grid_charge = mw * trans * pow_elec
@@ -54,11 +33,9 @@ for i in mw_lst:
     max_stor = stor_charge_time * mw * grid2h
     h2_import = np.where((h_need_storage - max_stor)<=0,0,(h_need_storage - max_stor))
     h_stor_possible = np.where(h_need_storage>=max_stor,max_stor,h_need_storage)
-    # np.argmin(np.abs(np.array(mw_lst)-i))
     plt.plot(runtime,h2_import,"--",color=colors[np.argmin(np.abs(np.array(mw_lst)-i))],linewidth=linewidth)
-    # storage_lst.append(h_stor_possible)
     plt.plot(runtime,h_stor_possible,"-",color=colors[np.argmin(np.abs(np.array(mw_lst)-i))],linewidth=linewidth)
-# result = np.squeeze(storage_lst).T
+
 
 plt.xticks(np.arange(0, 1+0.1, step=0.1))
 plt.yticks(np.arange(0, 50+5, step=5))
