@@ -3,18 +3,18 @@ import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
 import matplotlib.patches as mpatches
 
-trans = 0.9
-comp = 0.85
-pow_elec = 0.9
-tot_veh_E = 26.5732# * 0.5
+trans = 0.9 # transformer efficiency
+comp = 0.85 # compressor efficiency
+pow_elec = 0.9 # power controller electronics efficiency
+tot_veh_E = 26.5732# (* 0.5) total vehicle energy demand
 
 stor_night_charge_time = 12 #hr
 colors = ('red','blue','green','darkorange')
-ec = 0.7 # electrolyzer efficiency
-fc = 0.5 # fuel cell efficiency
+ec = 0.8 # electrolyzer efficiency
+fc = 0.6 # fuel cell efficiency
 
-grid2h = trans * pow_elec * ec * comp
-h2elec = fc * pow_elec
+grid2h = trans * pow_elec * ec * comp # grid to hydrogen efficiency
+h2elec = fc * pow_elec # hydrogen to vehicle efficiency
 
 
 linewidth=2
@@ -59,6 +59,6 @@ grid2 = mpatches.Patch(label='2 MW Grid', color='blue')
 grid3 = mpatches.Patch(label='3 MW Grid', color='green')
 plt.legend(handles=[storage_cap,import_h2,grid1,grid2,grid3],ncol=3,loc='upper center')
 plt.xlabel('Runtime fraction')
-plt.ylabel('Energy Storage Capacities/Imported Hydrogen (MWh)')
-plt.title('Hydrogen energy stroage capacities vs. runtime fraction')
+plt.ylabel('Energy storage capacity/Imported Hydrogen (MWh)')
+plt.title('Hydrogen energy stroage capacity vs. runtime fraction')
 plt.show()
