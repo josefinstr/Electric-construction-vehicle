@@ -10,8 +10,8 @@ tot_veh_E = 26.5732# * 0.5
 
 stor_night_charge_time = 12 #hr
 colors = ('red','blue','green','darkorange')
-ec = 0.8
-fc = 0.6
+ec = 0.7 # electrolyzer efficiency
+fc = 0.5 # fuel cell efficiency
 
 grid2h = trans * pow_elec * ec * comp
 h2elec = fc * pow_elec
