@@ -10,8 +10,8 @@ tot_veh_E = 26.5732# (* 0.5) total vehicle energy demand
 
 stor_night_charge_time = 12 #hr
 colors = ('red','blue','green','darkorange')
-ec = 0.8 # electrolyzer efficiency
-fc = 0.6 # fuel cell efficiency
+ec = 0.7 # electrolyzer efficiency
+fc = 0.5 # fuel cell efficiency
 
 grid2h = trans * pow_elec * ec * comp # grid to hydrogen efficiency
 h2elec = fc * pow_elec # hydrogen to vehicle efficiency
@@ -60,5 +60,5 @@ grid3 = mpatches.Patch(label='3 MW Grid', color='green')
 plt.legend(handles=[storage_cap,import_h2,grid1,grid2,grid3],ncol=3,loc='upper center')
 plt.xlabel('Runtime fraction')
 plt.ylabel('Energy storage capacity/Imported Hydrogen (MWh)')
-plt.title('Hydrogen energy stroage capacity vs. runtime fraction')
+plt.title('Hydrogen energy storage capacity vs. runtime fraction ($η_{EC}/η_{FC} = 0.7/0.5$)')
 plt.show()
