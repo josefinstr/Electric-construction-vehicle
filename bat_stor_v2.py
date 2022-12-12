@@ -69,9 +69,9 @@ plt.plot(runtime_lst,import_arr[0],":",color='red',linewidth=linewidth)
 plt.plot(runtime_lst,import_arr[1],":",color='blue',linewidth=linewidth)
 plt.plot(runtime_lst,import_arr[2],":",color='green',linewidth=linewidth)
 
-print(storage_arr[0,300]) # 1MW, runtime 0.3
-print(storage_arr[1,300]) # 1MW, runtime 0.3
-print(storage_arr[2,300]) # 1MW, runtime 0.3
+print('w/o PV park, 1 MW:',storage_arr[0,300]) # 1MW, runtime 0.3
+print('w/o PV park, 2 MW:',storage_arr[1,300]) # 2MW, runtime 0.3
+print('w/o PV park, 3 MW:',storage_arr[2,300]) # 3MW, runtime 0.3
 
 mw_lst = np.array([1,2,3])
 mw_lst = mw_lst + 0.499# from solar month 18
@@ -104,6 +104,7 @@ for i in mw_lst:
         storage_lst.append(storage)
         night_stor_lst.append(night_stor)
 
+
 storage_arr = np.split(np.array(storage_lst), 3)
 storage_arr = np.squeeze(storage_arr)
 import_arr = np.split(np.array(import_stor_lst), 3)
@@ -116,14 +117,17 @@ plt.plot(runtime_lst,import_arr[1],"--",color='blue',linewidth=linewidth)
 plt.plot(runtime_lst,import_arr[2],"--",color='green',linewidth=linewidth)
 
 # print(storage_arr[0,300]) # 1MW, runtime 0.3
+print('w/ PV park, 1 MW:',storage_arr[0,300]) # 1MW, runtime 0.3
+print('w/ PV park, 2 MW:',storage_arr[1,300]) # 2MW, runtime 0.3
+print('w/ PV park, 3 MW:',storage_arr[2,300]) # 3MW, runtime 0.3
 
 plt.xticks(np.arange(0, 1+0.1, step=0.1))
 plt.yticks(np.arange(0, 18+1, step=1))
 plt.grid()
 plt.ylim(0,18)
 plt.xlim(0,1)
-storage_cap_sol = Line2D([0], [0], label='Storage Capacities with solar power', color='black', linestyle='-',linewidth=linewidth)
-storage_cap_nosol = Line2D([0], [0], label='Storage Capacities without solar power', color='black', linestyle='-.',linewidth=linewidth)
+storage_cap_sol = Line2D([0], [0], label='Storage capacities with solar power', color='black', linestyle='-',linewidth=linewidth)
+storage_cap_nosol = Line2D([0], [0], label='Storage capacities without solar power', color='black', linestyle='-.',linewidth=linewidth)
 import_h2_sol = Line2D([0], [0], label='Imported battery with solar power', color='black', linestyle='--',linewidth=linewidth)
 import_h2_nosol = Line2D([0], [0], label='Imported battery without solar power', color='black', linestyle=':',linewidth=linewidth)
 grid1 = mpatches.Patch(label='1 MW Grid', color='red')
