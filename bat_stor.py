@@ -40,36 +40,37 @@ for i in mw_lst:
     # battery
     need_bat_1c = elec_from_storage/bat_discharging
     max_bat_stor = grid * storage_charge_time * grid2bat
-    extra_bat_night = np.where(need_bat_1c > max_bat_stor,need_bat_1c-max_bat_stor,0)
-    extra_bat_need_3c = extra_bat_night*3
+    # extra_bat_night = np.where(need_bat_1c > max_bat_stor,need_bat_1c-max_bat_stor,0)
+    # extra_bat_need_3c = extra_bat_night*3
     bat_prod_night = stor_night_charge_time * grid * grid2bat
     import_bat = (need_bat_1c*3)-(max_bat_stor+bat_prod_night)
     tot_bat_stor_size = np.where(bat_prod_night+max_bat_stor<need_bat_1c*3,bat_prod_night+max_bat_stor,need_bat_1c*3)
     tot_bat_stor_size = tot_bat_stor_size/0.6
     plt.plot(runtime,import_bat,":",color=colors[np.argmin(np.abs((mw_lst)-i))],linewidth=linewidth)
     plt.plot(runtime,tot_bat_stor_size,"-.",color=colors[np.argmin(np.abs((mw_lst)-i))],linewidth=linewidth)
+    # plt.plot(runtime,need_bat_1c*3/0.6)
 
-mw_lst = np.array([1,2,3])
-mw_lst = mw_lst + 0.499 # from solar month 18
+# mw_lst = np.array([1,2,3])
+# mw_lst = mw_lst + 0.499 # from solar month 18
 
-for i in mw_lst:
-    grid = i
-    act_veh_usage_1c = runtime*tot_veh_E/3
-    grid_charge_pow = grid * trans * pow_elec
-    grid_charge_energy = charge_time * grid_charge_pow
-    elec_from_storage = np.where(act_veh_usage_1c - grid_charge_energy > 0, act_veh_usage_1c - grid_charge_energy,0)
+# for i in mw_lst:
+#     grid = i
+#     act_veh_usage_1c = runtime*tot_veh_E/3
+#     grid_charge_pow = grid * trans * pow_elec
+#     grid_charge_energy = charge_time * grid_charge_pow
+#     elec_from_storage = np.where(act_veh_usage_1c - grid_charge_energy > 0, act_veh_usage_1c - grid_charge_energy,0)
     
-    # battery
-    need_bat_1c = elec_from_storage/bat_discharging
-    max_bat_stor = grid * storage_charge_time * grid2bat
-    extra_bat_night = np.where(need_bat_1c > max_bat_stor,need_bat_1c-max_bat_stor,0)
-    extra_bat_need_3c = extra_bat_night*3
-    bat_prod_night = stor_night_charge_time * grid * grid2bat
-    import_bat = (need_bat_1c*3)-(max_bat_stor+bat_prod_night)
-    tot_bat_stor_size = np.where(bat_prod_night+max_bat_stor<need_bat_1c*3,bat_prod_night+max_bat_stor,need_bat_1c*3)
-    tot_bat_stor_size = tot_bat_stor_size/0.6
-    plt.plot(runtime,import_bat,"--",color=colors[np.argmin(np.abs(np.array(mw_lst)-i))],linewidth=linewidth)
-    plt.plot(runtime,tot_bat_stor_size,"-",color=colors[np.argmin(np.abs(np.array(mw_lst)-i))],linewidth=linewidth)
+#     # battery
+#     need_bat_1c = elec_from_storage/bat_discharging
+#     max_bat_stor = grid * storage_charge_time * grid2bat
+#     # extra_bat_night = np.where(need_bat_1c > max_bat_stor,need_bat_1c-max_bat_stor,0)
+#     # extra_bat_need_3c = extra_bat_night*3
+#     bat_prod_night = stor_night_charge_time * grid * grid2bat
+#     import_bat = (need_bat_1c*3)-(max_bat_stor+bat_prod_night)
+#     tot_bat_stor_size = np.where(bat_prod_night+max_bat_stor<need_bat_1c*3,bat_prod_night+max_bat_stor,need_bat_1c*3)
+#     tot_bat_stor_size = tot_bat_stor_size/0.6
+#     plt.plot(runtime,import_bat,"--",color=colors[np.argmin(np.abs(np.array(mw_lst)-i))],linewidth=linewidth)
+#     plt.plot(runtime,tot_bat_stor_size,"-",color=colors[np.argmin(np.abs(np.array(mw_lst)-i))],linewidth=linewidth)
 
 plt.xticks(np.arange(0, 1+0.1, step=0.1))
 plt.yticks(np.arange(0, 50+5, step=1))
