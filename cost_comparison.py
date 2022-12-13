@@ -4,26 +4,26 @@ import pandas as pd
 #cost comparison
 
 #SCENARIO 1
-elec_1 = 21300000/(10^6) #MSEK electricity cost
-cert_1 = 39755/(10^6) #MSEK certificate cost
-vat_1 = 559064/(10^6) #MSEK value-added taxes
-infr = 6834006/(10^6) #MSEK charging infrastructure cost
+elec_1 = 21300000/(10**6) #MSEK electricity cost
+cert_1 = 39755/(10**6) #MSEK certificate cost
+vat_1 = 559064/(10**6) #MSEK value-added taxes
+infr = 6834006/(10**6) #MSEK charging infrastructure cost
 
 #SCENARIO 3
-elec_2 = 18400000/(10^6) #MSEK electricity cost
-cert_2 = 21035/(10^6) #MSEK certificate cost
-vat_2 = 295814/(10^6) #MSEK value-added taxes
-h2_stor_2 = 29400000/(10^6) #MSEK hydrogen storage cost
-bat_stor_2 = 18200000/(10^6) #MSEK battery storage cost
-bat_swapping = 21600000/(10^6) #MSEK battery swapping additional cost
+elec_2 = 18400000/(10**6) #MSEK electricity cost
+cert_2 = 21035/(10**6) #MSEK certificate cost
+vat_2 = 295814/(10**6) #MSEK value-added taxes
+h2_stor_2 = 29400000/(10**6) #MSEK hydrogen storage cost
+bat_stor_2 = 18200000/(10**6) #MSEK battery storage cost
+bat_swapping = 21600000/(10**6) #MSEK battery swapping additional cost
 
 #SCENARIO 3
-elec_3 = 16500000/(10^6) #MSEK electricity cost
-cert_3 = 33839/(10^6) #MSEK certificate cost
-vat_3 = 374194/(10^6) #MSEK value-added taxes
-h2_stor_3 = 29300000/(10^6) #MSEK hydrogen storage cost
-bat_stor_3 = 15700000/(10^6) #MSEK battery storage cost
-pv_park = 2100000/(10^6) #MSEK pv park cost
+elec_3 = 16500000/(10**6) #MSEK electricity cost
+cert_3 = 33839/(10**6) #MSEK certificate cost
+vat_3 = 374194/(10**6) #MSEK value-added taxes
+h2_stor_3 = 29300000/(10**6) #MSEK hydrogen storage cost
+bat_stor_3 = 15700000/(10**6) #MSEK battery storage cost
+pv_park = 2100000/(10**6) #MSEK pv park cost
 
 df = pd.DataFrame([['Scenario 1',elec_1,cert_1,vat_1,0,0,0,infr],['Scenario 2 Hydrogen',
                     elec_2,cert_2,vat_2,h2_stor_2,0,0,infr],['Scenario 2 Battery',elec_2,
@@ -38,14 +38,15 @@ df = pd.DataFrame([['Scenario 1',elec_1,cert_1,vat_1,0,0,0,infr],['Scenario 2 Hy
 print(df)
 
 # plot data in stack manner of bar type
-fig1 = plt.figure(figsize=(30, 27))
+fig1 = plt.figure(figsize=(10, 11))
 ax1 = fig1.add_subplot(111)
 # ax1.plot(df.x)
-df.plot(x='Scenario', kind='bar', stacked=True,ax=ax1,fontsize=29)
-plt.title('Cost comparison',fontsize=35)
-plt.xlabel('Scenario',fontsize=33)
-plt.ylabel('Cost [MSEK]',fontsize=33)
-plt.legend(fontsize=32) #loc='upper right'
-plt.grid()
+df.plot(x='Scenario', kind='bar', stacked=True,ax=ax1,fontsize=12)
+plt.title('Cost comparison',fontsize=15)
+plt.xlabel('Scenario',fontsize=12)
+plt.ylabel('Cost [MSEK]',fontsize=12)
+plt.legend(fontsize=12) #loc='upper right'
+plt.grid(axis='y')
+plt.ylim(0,60)
 plt.savefig("cost_comparison.png")
 fig1.show()
